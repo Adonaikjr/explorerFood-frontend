@@ -16,6 +16,7 @@ fieldset{
     width: 348px;
     input{
         height:48px;
+       
     }
     >button{
         margin-top: 32px;
@@ -55,6 +56,7 @@ fieldset{
 
     }
 `
+
 
 export const Background = styled.div`
     flex:1;

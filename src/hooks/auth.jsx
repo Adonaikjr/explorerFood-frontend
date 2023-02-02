@@ -5,20 +5,21 @@ export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
-
+ 
   async function signIn({ email, password }) {
     try {
-      const response = await api.post('/sessions', { email, password })
-      const { user, token } = response.data
-
-      localStorage.setItem('@explorerFood:user', JSON.stringify(user))
+      const response = await api.post('/session', { email, password })
+      const { id, token } = response.data
+      localStorage.setItem('@explorerFood:user', JSON.stringify(id))
       localStorage.setItem('@explorerFood:token', token)
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
-      setData({ user, token })
+      setData({ id, token })
+
     } catch (error) {
       if (error.response) {
-        toast('Preencha todos os campos ⚠️', { theme: 'light' })
+
+        toast('Usuario não encontrado ⚠️', { theme: 'dark' })
       } else {
         toast('nao foi possivel entrar')
       }
@@ -49,15 +50,14 @@ function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('@rocketnotes:token')
-    const user = localStorage.getItem('@rocketnotes:user')
+    const token = localStorage.getItem('@explorerFood:token')
+    const id = localStorage.getItem('@explorerFood:user')
 
-    if (token && user) {
+    if (token && id) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`
-
       setData({
         token,
-        user: JSON.parse(user),
+        id: JSON.parse(id),
       })
     }
   }, [])
@@ -68,7 +68,7 @@ function AuthProvider({ children }) {
         signIn,
         signOut,
         updateProfile,
-        user: data.user,
+        id: data.id,
       }}
     >
       {children}

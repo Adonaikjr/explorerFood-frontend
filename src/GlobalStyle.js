@@ -8,10 +8,11 @@ export default createGlobalStyle`
     }
 
     body{
-        width: 100%;
+        max-width: 1280px;
         background-color: ${({theme}) => theme.COLORS.BACKGROUND_800};
         color: ${({theme}) => theme.COLORS.WHITE};
         -webkit-font-smoothing: antialiased;
+        font-family: 'Roboto Slab', serif;
         
     }
     button{

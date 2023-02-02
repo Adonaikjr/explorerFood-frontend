@@ -13,7 +13,7 @@ export function ContainerHeader() {
     const { signOut } = useAuth()
     return (
         <Container>
-            <Link to="/home">
+            <Link to="/new">
                 <Logo>
                     <img src={polygon} alt='polyg' />
                 </Logo>

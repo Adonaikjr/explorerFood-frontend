@@ -6,6 +6,8 @@ export const ContainerButton = styled.button`
     font-weight: 500;
     font-size: 20px;
     cursor: pointer;
+    height: 3rem;
+    border: none;
     &:disabled{
         opacity: 0.5;
         cursor: not-allowed;

@@ -1,19 +1,19 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import { Input } from '../../components/Input'
-import { Background, ContainerSignin, Form } from './styled'
-import { FiMail, FiLock } from 'react-icons/fi'
-import { Button } from '../../components/Button'
-import { Link } from 'react-router-dom'
-import { useAuth } from '../../hooks/auth'
+import { Input } from "../../components/Input";
+import { Background, ContainerSignin, Form } from "./styled";
+import { FiMail, FiLock } from "react-icons/fi";
+import { Button } from "../../components/Button";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 export function Signin() {
-  const { signIn } = useAuth()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
+  const { signIn } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+const navigate = useNavigate()
   function handleSignIn() {
-    signIn({ email, password })
+    signIn({ email, password });
   }
 
   return (
@@ -21,25 +21,29 @@ export function Signin() {
       <Form>
         <h1>Faça login</h1>
         <fieldset>
-          <label>E-mail</label>
-          <Input
-            placeholder="Email"
-            type="email"
-            icon={FiMail}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label>Senha</label>
-          <Input
-            placeholder="Senha"
-            type="password"
-            icon={FiLock}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <label>
+            E-mail
+            <Input
+              placeholder="Email"
+              type="email"
+              icon={FiMail}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label>
+            Senha
+            <Input
+              placeholder="Senha"
+              type="password"
+              icon={FiLock}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
           <Button title="Entrar" onClick={handleSignIn} />
         </fieldset>
         <Link to="/Signup">Criar Conta</Link>
       </Form>
       <Background />
     </ContainerSignin>
-  )
+  );
 }

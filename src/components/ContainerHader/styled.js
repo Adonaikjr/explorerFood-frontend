@@ -63,7 +63,6 @@ align-items: center;
 justify-content: center;
 background-color: ${({ theme }) => theme.COLORS.inputBackground};
 border-radius: 5px 5px 5px 5px;
-border: solid;
 width: 21.5rem;
 
   input{
