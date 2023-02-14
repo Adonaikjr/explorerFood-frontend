@@ -1,20 +1,22 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { api } from '../service/api'
 import { toast } from 'react-toastify'
+
 export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
- 
+
   async function signIn({ email, password }) {
     try {
       const response = await api.post('/session', { email, password })
-      const { id, token } = response.data
-      localStorage.setItem('@explorerFood:user', JSON.stringify(id))
+      const { user, token } = response.data
+      
+      localStorage.setItem('@explorerFood:user', JSON.stringify(user))
       localStorage.setItem('@explorerFood:token', token)
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
-      setData({ id, token })
+      setData({ user, token })
 
     } catch (error) {
       if (error.response) {
@@ -51,13 +53,13 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('@explorerFood:token')
-    const id = localStorage.getItem('@explorerFood:user')
+    const user = localStorage.getItem('@explorerFood:user')
 
-    if (token && id) {
+    if (token && user) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`
       setData({
         token,
-        id: JSON.parse(id),
+        user,
       })
     }
   }, [])
@@ -68,7 +70,7 @@ function AuthProvider({ children }) {
         signIn,
         signOut,
         updateProfile,
-        id: data.id,
+        user: data.user,
       }}
     >
       {children}

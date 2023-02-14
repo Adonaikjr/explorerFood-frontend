@@ -4,7 +4,7 @@ import { AppRoutes } from './app.routes'
 import { AuthRoutes } from './auth.routes'
 
 export function Routes() {
-  const { id } = useAuth()
+  const { user } = useAuth()
 
-  return <BrowserRouter>{id ? <AppRoutes /> : <AuthRoutes />}</BrowserRouter>
+  return <BrowserRouter>{user ? <AppRoutes /> : <AuthRoutes />}</BrowserRouter>
 }

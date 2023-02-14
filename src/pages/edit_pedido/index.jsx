@@ -16,6 +16,7 @@ import { api } from "../../service/api";
 import { NoteItem } from "../../components/NoteItem";
 import { TiArrowBack } from "react-icons/all";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 export function Editpedido() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -27,35 +28,21 @@ export function Editpedido() {
   const [newIngredient, setNewIngredient] = useState([]);
   const [category, setCategory] = useState();
 
+  const id = "1";
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
 
       formData.append("file", file);
-      formData.append("name", name);
+      formData.append("title", name);
       formData.append("price", price);
       formData.append("description", description);
-      formData.append("ingredients", ingredient);
+      formData.append("ingredient", ingredient);
+      formData.append("titleCategory", category);
 
-      if (category === "Pratos") {
-        await api.post("/newplate", formData);
-        alert("sucesso");
-        navigate("/");
-        return;
-      }
-      if (category === "Bebidas") {
-        await api.post("/bebidas", formData);
-        alert("sucesso");
-        navigate("/");
-        return;
-      }
-      if (category === "Sobremesas") {
-        await api.post("/sobremesas", formData);
-        alert("sucesso");
-        navigate("/");
-        return;
-      }
+      await api.post(`/plate/${id}`, formData);
     } catch (error) {
       console.log(error);
     }
