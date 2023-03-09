@@ -55,19 +55,6 @@ export function New() {
       categorys,
       links,
     })
-
-    // if (!title) {
-    //     return alert('digite o titulo da nota')
-    // }
-
-    // if (newTag) {
-    //     return alert('existem campos a serem adicionados, reveja suas tags')
-    // }
-
-    // if (newLink) {
-    //     return alert('existem campos a serem adicionados, reveja seus links')
-    // }
-
     navigate('/')
   }
 

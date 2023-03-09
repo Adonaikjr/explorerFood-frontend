@@ -1,10 +1,10 @@
 import { Container } from "./styled";
 
-export function NewButton({title, icon:Icon, children, ...rest}){
+export function NewButton({title, icon:Icon, children, countOrder, ...rest }){
     return(
         <Container {...rest}>
         {Icon && <Icon size={24}/>}
-            <p>{title}</p>
+            <p>{title}({countOrder})</p>
         {children}
         </Container>
     )

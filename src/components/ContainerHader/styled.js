@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
-import styled from 'styled-components'
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+
 export const Container = styled.header`
   width: 100%;
   height: auto;
@@ -39,7 +42,7 @@ export const Container = styled.header`
   line-height: 26px;
 
   text-align: center;
-`
+`;
 export const Logo = styled.div`
   font-family: Roboto;
   font-size: 25px;
@@ -55,36 +58,33 @@ export const Logo = styled.div`
     width: 163px;
     margin-right: 16px;
   }
- 
-`
+`;
 export const Label = styled.div`
-display:flex;
-align-items: center;
-justify-content: center;
-background-color: ${({ theme }) => theme.COLORS.inputBackground};
-border-radius: 5px 5px 5px 5px;
-width: 21.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.COLORS.inputBackground};
+  border-radius: 5px 5px 5px 5px;
+  width: 21.5rem;
 
-  input{
+  input {
     height: 3rem;
     //border: 1px solid ${({ theme }) => theme.COLORS.BORDER_INPUT};
     background-color: ${({ theme }) => theme.COLORS.inputBackground};
     border-radius: 5px;
-    color:  ${({ theme }) => theme.COLORS.BORDER_INPUT};
-    display:flex;
+    color: ${({ theme }) => theme.COLORS.BORDER_INPUT};
+    display: flex;
   }
-
-`
-
-export default styled.div`
+`;
+export default styled(Link)`
   button {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
   }
-`
+`;
 export const Favorites = styled.div`
   display: flex;
   align-items: center;
-`
+`;

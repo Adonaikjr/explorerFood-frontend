@@ -16,7 +16,7 @@ import { api } from "../../service/api";
 import { NoteItem } from "../../components/NoteItem";
 import { TiArrowBack } from "react-icons/all";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/auth";
+
 export function Editpedido() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -43,6 +43,8 @@ export function Editpedido() {
       formData.append("titleCategory", category);
 
       await api.post(`/plate/${id}`, formData);
+      navigate("/");
+      
     } catch (error) {
       console.log(error);
     }

@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
- 
+  color: ${({ theme }) => theme.COLORS.color_font};
   width: 18.75rem;
   margin: 1rem;
   padding: 1rem;
@@ -18,8 +19,8 @@ export const Container = styled.div`
     font-size: 24px;
     font-weight: 700;
     line-height: 34px;
-    letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
+    width: 100%;
   }
   :hover {
     -webkit-transform: scale(1.5);
@@ -70,6 +71,14 @@ export const Container = styled.div`
     }
     justify-content: center;
   }
+`;
+
+export const ContentCard = styled(Link)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Content = styled.div`

@@ -10,11 +10,22 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
-  transition: 1s;
   margin-top: -9.37rem;
-  transform: matrix(-1, 0, 0, 1, 0, 0);
-  animation: topdown 1s;
-  @keyframes topdown {
+   
+
+  position: relative;
+  animation: mymove ;
+  animation-duration: 2s;
+
+
+@keyframes mymove {
+  from {left: -200px;}
+  to {left: 0px;}
+}
+
+  /* transform: matrix(-1, 0, 0, 1, 0, 0); */
+  /* animation: topdown 1s; */
+  /* /* @keyframes topdown {
     0% {
         transition: 1s;
       opacity: 0;
@@ -40,6 +51,6 @@ export const Container = styled.div`
         transition: 1s;
       opacity: 1;
       transform: translateX(0);
-    }
-  }
+    } 
+  } */
 `;

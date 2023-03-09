@@ -7,38 +7,13 @@ import {
   Main,
 } from "./styled";
 import { TranslateImg } from "../../components/TranslateImg";
-
-import { api } from "../../service/api";
 import { Card } from "../../components/Cards";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../hooks/auth";
 
 export function Home() {
-  const [prato, setPrato] = useState([]);
-  const [bebida, setBebida] = useState([]);
-  const [sobremesa, setSobremesa] = useState([]);
-  const baseUrl = "http://localhost:3000";
-
-  useEffect(() => {
-    async function getPlates() {
-      try {
-        const pratos = await api.get("/newPlate");
-        console.log(pratos.data);
-        setPrato(pratos.data);
-
-        const bebidas = await api.get("/bebidas");
-        console.log(bebidas);
-        setBebida(bebidas.data);
-
-        const sobremesas = await api.get("/sobremesas");
-        console.log(sobremesas);
-        setSobremesa(sobremesas.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getPlates();
-  }, []);
+  const { dataPlates } = useContext(AuthContext);
+  const baseUrl = "http://localhost:3333";
 
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -46,6 +21,46 @@ export function Home() {
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 },
   ];
+
+  const newPlates_id = dataPlates.category
+    ?.map((category) => {
+      if (category.titleCategory === "Pratos") {
+        return category.plate_id;
+      }
+    })
+    .filter(Boolean);
+  const newPlatesData = dataPlates.plates?.filter((item) => {
+    if (newPlates_id.includes(item.id)) {
+      return item;
+    }
+  });
+
+  const newDrinks_id = dataPlates.category
+    ?.map((category) => {
+      if (category.titleCategory === "Bebidas") {
+        return category.plate_id;
+      }
+    })
+    .filter(Boolean);
+
+  const newDrinksData = dataPlates.plates?.filter((item) => {
+    if (newDrinks_id.includes(item.id)) {
+      return item;
+    }
+  });
+
+  const newDissert_id = dataPlates.category
+    ?.map((category) => {
+      if (category.titleCategory === "Sobremesa") {
+        return category.plate_id;
+      }
+    })
+    .filter(Boolean);
+  const newDissertData = dataPlates.plates?.filter((item) => {
+    if (newDissert_id.includes(item.id)) {
+      return item;
+    }
+  });
 
   return (
     <ContainerHome>
@@ -62,61 +77,68 @@ export function Home() {
         <h1>Pratos Principais</h1>
 
         <ContainerCarrousel breakPoints={breakPoints}>
-          {prato.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                img={
-                  <img
-                    src={`${baseUrl}/files/${item.banner}`}
-                    alt={item.name}
-                  />
-                }
-                p={item.ingredients}
-                price={item.price}
-                title={item.name}
-              />
-            );
-          })}
+          {newPlatesData &&
+            newPlatesData.map((item) => {
+              return (
+                <Card
+                  to={`/details/plates/${item.id - 1}`}
+                  key={item.id}
+                  plate_id={item.id}
+                  p={item.description}
+                  img={
+                    <img
+                      src={`${baseUrl}/file/${item.banner}`}
+                      alt={item.title}
+                    />
+                  }
+                  title={item.title}
+                  price={item.price}
+                />
+              );
+            })}
         </ContainerCarrousel>
 
         <h1>Sobremesas</h1>
         <ContainerCarrousel breakPoints={breakPoints}>
-          {sobremesa.map((sobremesas) => {
-            return (
-              <Card
-                key={sobremesas.id}
-                img={
-                  <img
-                    src={`${baseUrl}/files/${sobremesas.banner}`}
-                    alt={sobremesas.name}
-                  />
-                }
-                p={sobremesas.ingredients}
-                price={sobremesas.price}
-                title={sobremesas.name}
-              />
-            );
-          })}
+          {newDissertData &&
+            newDissertData.map((item) => {
+              return (
+                <Card
+                  to={`/details/plates/${item.id}`}
+                  key={item.id}
+                  p={item.description}
+                  img={
+                    <img
+                      src={`${baseUrl}/file/${item.banner}`}
+                      alt={item.title}
+                    />
+                  }
+                  title={item.title}
+                  price={item.price}
+                />
+              );
+            })}
         </ContainerCarrousel>
-        <h1>Bebidas</h1>
+        <h1>drinks</h1>
         <ContainerCarrousel breakPoints={breakPoints}>
-          {bebida.map((bebidas) => {
-            return (
-              <Card
-                key={bebidas.id}
-                img={
-                  <img
-                    src={`${baseUrl}/files/${bebidas.banner}`}
-                    alt={bebidas.name}
-                  />
-                }
-                p={bebidas.ingredients}
-                price={bebidas.price}
-                title={bebidas.name}
-              />
-            );
-          })}
+          {newDrinksData &&
+            newDrinksData.map((item) => {
+              return (
+                <Card
+                  to={`/details/plates/${item.id - 1}`}
+                  key={item.id}
+                  p={item.description}
+                  img={
+                    <img
+                      src={`${baseUrl}/file/${item.banner}`}
+                      alt={item.title}
+                    />
+                  }
+                  title={item.title}
+                  price={item.price}
+                />
+              );
+            })}
         </ContainerCarrousel>
       </Main>
     </ContainerHome>

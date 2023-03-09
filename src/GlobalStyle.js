@@ -9,10 +9,22 @@ export default createGlobalStyle`
 
     body{
         max-width: 1280px;
-        background-color: ${({theme}) => theme.COLORS.BACKGROUND_800};
-        color: ${({theme}) => theme.COLORS.WHITE};
+        background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
+        color: ${({ theme }) => theme.COLORS.WHITE};
         -webkit-font-smoothing: antialiased;
         font-family: 'Roboto Slab', serif;
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
+        }
+        ::-webkit-scrollbar-button {
+            background-color: ${({ theme }) => theme.COLORS.secondBackground};
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #0d1d25, #00111a);
+        }
         
     }
     button{
@@ -28,4 +40,4 @@ export default createGlobalStyle`
     }
 
 
-`
+`;

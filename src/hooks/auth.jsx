@@ -1,68 +1,103 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import { api } from '../service/api'
-import { toast } from 'react-toastify'
+import { createContext, useContext, useState, useEffect } from "react";
+import { api } from "../service/api";
+import { toast } from "react-toastify";
 
-export const AuthContext = createContext({})
+export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
+  const [countOrder, setCountOrder] = useState(0)
+  const [dataPlates, setDataPlates] = useState({})
+  const [search, setSearch] = useState(null);
+  const [Query, setQuery] = useState("");
+  
+
 
   async function signIn({ email, password }) {
     try {
-      const response = await api.post('/session', { email, password })
-      const { user, token } = response.data
-      
-      localStorage.setItem('@explorerFood:user', JSON.stringify(user))
-      localStorage.setItem('@explorerFood:token', token)
+      const response = await api.post("/session", { email, password });
+      const { user, token } = response.data;
 
-      api.defaults.headers.common.Authorization = `Bearer ${token}`
-      setData({ user, token })
+      localStorage.setItem("@explorerFood:user", JSON.stringify(user));
+      localStorage.setItem("@explorerFood:token", token);
 
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      setData({ user, token });
     } catch (error) {
       if (error.response) {
-
-        toast('Usuario não encontrado ⚠️', { theme: 'dark' })
+        toast("Usuario não encontrado ⚠️", { theme: "dark" });
       } else {
-        toast('nao foi possivel entrar')
+        toast("nao foi possivel entrar");
       }
     }
   }
 
   function signOut() {
-    localStorage.removeItem('@explorerFood:token')
-    localStorage.removeItem('@explorerFood:user')
+    localStorage.removeItem("@explorerFood:token");
+    localStorage.removeItem("@explorerFood:user");
 
-    setData({})
+    setData({});
   }
 
   async function updateProfile({ user }) {
     try {
-      await api.put('/users', user)
-      localStorage.setItem('@explorerFood:user', JSON.stringify(user))
+      await api.put("/users", user);
+      localStorage.setItem("@explorerFood:user", JSON.stringify(user));
 
-      setData({ user, token: data.token })
-      alert('Perfil atualizado')
+      setData({ user, token: data.token });
+      alert("Perfil atualizado");
     } catch (error) {
       if (error.response) {
-        toast('algo deu errado tente mais tarde')
+        toast("algo deu errado tente mais tarde");
       } else {
-        toast('nao foi possivel atualizar perfil')
+        toast("nao foi possivel atualizar perfil");
       }
     }
   }
 
+  const getPlate = async () => {
+    const admin = '1'
+    try {
+      const res = await api.get(`plate/admin/${admin}`);
+      setDataPlates(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
+  const getSearch = async () => {
+    try {
+      const res = await api.get(`plate/?user_id=1&title=${search}&ingredient`);
+      setQuery(res.data);
+      console.log(Query);  
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+
   useEffect(() => {
-    const token = localStorage.getItem('@explorerFood:token')
-    const user = localStorage.getItem('@explorerFood:user')
+    getSearch();
+  }, [search]);
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("@explorerFood:token");
+    const user = localStorage.getItem("@explorerFood:user");
 
     if (token && user) {
-      api.defaults.headers.common.Authorization = `Bearer ${token}`
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
       setData({
         token,
         user,
-      })
+      });
     }
-  }, [])
+
+    getPlate()
+  }, []);
+
 
   return (
     <AuthContext.Provider
@@ -71,15 +106,21 @@ function AuthProvider({ children }) {
         signOut,
         updateProfile,
         user: data.user,
+        countOrder, 
+        setCountOrder,
+        dataPlates,
+        Query,
+        search,
+        setSearch
       }}
     >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 function useAuth() {
-  const context = useContext(AuthContext)
-  return context
+  const context = useContext(AuthContext);
+  return context;
 }
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };

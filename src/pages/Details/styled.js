@@ -1,56 +1,68 @@
 import styled from "styled-components";
+import { Container } from "../../components/Cards/styled";
 
-export const ContainerSignin = styled.div`
-    width:100%;
-    height:100vh;
-
-    display: grid;
-    grid-template-rows: 105px auto;
-    grid-template-areas:
-    "header"
-    "content" ;
-
-    >main{
-        grid-area: content;
-        overflow-y: scroll;
-        padding:64px 0;
-
-    }
+export const ContainerDetails = styled.div`
+  width: 100%;
+  height: 100%;
+li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+ img {
+  margin: 0px;
+  padding: 0px;
+  height: 50px;
+  width: 50px;
+ }
+}
+  color: white;
+`;
+export const ContainerIngredientImage = styled.div`
+display: flex;
+gap: 0.5rem;
 `
-
-export const ContainerLinks = styled.ul`
-    list-style: none;
-    >li{
-        
-        margin-top:12px;
-        a{
-            color: ${({theme}) => theme.COLORS.WHITE};
-        }
+export const ContentDetails = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  p,
+  h1 {
+    width: 100%;
+    text-align: center;
+    padding: 0.2rem;
+  }
+  p {
+    > span {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 51px;
+      letter-spacing: 0em;
+      text-align: center;
+      color: ${({ theme }) => theme.COLORS.priceColor};
     }
-`
-export const Content = styled.div`
-
-    width:50%;
-    margin:0 auto;
-
-    display: flex;
-    flex-direction: column;
-
-    >button:first-child{
-        align-self: end;
-
-    }
-    >h1{
-        font-size: 36px;
-        font-weight: 500;
-        padding-top:64px
-    }
-
-    >p{
-        font-size: 16px;
-        margin:16px 16px 16px 16px;
-        text-align:justify;
-
-    }
-
-`
+  }
+  img {
+    width: 100%;
+    padding: 1.4rem;
+  }
+`;
+export const ContainerAddCar = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  strong {
+    margin: 1rem;
+    font-size: 24px;
+  }
+  button {
+    margin: 1rem;
+    color: ${({ theme }) => theme.COLORS.color_font};
+    background-color: ${({ theme }) => theme.COLORS.colorButtonCard};
+  }
+`;

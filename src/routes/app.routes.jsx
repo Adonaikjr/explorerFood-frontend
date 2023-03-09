@@ -1,10 +1,10 @@
-import { Routes, Route } from 'react-router-dom'
-import { Error } from '../pages/Error'
-import { App } from '../pages/Details/App'
-import { Home } from '../pages/Home'
-import { Profile } from '../pages/Profile'
-import { LayoutDefault } from '../Layout/LayoutDefault'
-import { Editpedido } from '../pages/edit_pedido'
+import { Routes, Route } from "react-router-dom";
+import { Error } from "../pages/Error";
+import { Details } from "../pages/Details";
+import { Home } from "../pages/Home";
+import { LayoutDefault } from "../Layout/LayoutDefault";
+import { Editpedido } from "../pages/edit_pedido";
+import { Orders } from '../pages/Orders'
 
 export function AppRoutes() {
   return (
@@ -12,12 +12,11 @@ export function AppRoutes() {
       <Route path="/" element={<LayoutDefault />}>
         <Route path="/" element={<Home />} />
         <Route path="/new" element={<Editpedido />} />
+        <Route path="/details/plates/:id" element={<Details />} />
+        <Route path="/pedidos" element={<Orders />} />
       </Route>
-
-      <Route path="/details/:id" element={<App />} />
-      <Route path="/profile" element={<Profile />} />
-
+     
       <Route path="*" element={<Error />} />
     </Routes>
-  )
+  );
 }

@@ -36,7 +36,13 @@ export const ContainerCarrousel = styled(Carousel)`
   .rec-carousel-item:focus {
     outline: auto;
   }
-  
+      position: relative;
+  animation: mymoveCarrousel ;
+  animation-duration: 1s;
+  @keyframes mymoveCarrousel {
+  from {top: 200px;}
+  to {top: 0px;}
+}
 `;
 
 export const Section = styled.div`
@@ -65,20 +71,24 @@ export const Title = styled.div`
 
     color: ${({ theme }) => theme.COLORS.GRAY_80};
 
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%;
-      }
-    }
+    position: relative;
+  animation: mymoveTwo ;
+  animation-duration: 1s;
+
+
+@keyframes mymoveTwo {
+  from {left: 200px;}
+  to {left: 0px;}
+}
   }
   p {
     font-family: Poppins;
     font-size: 16px;
     font-weight: 400;
     line-height: 22px;
+    position: relative;
+  animation: mymoveTwo ;
+  animation-duration: 2s;
   }
 `;
 
