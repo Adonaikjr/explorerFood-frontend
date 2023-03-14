@@ -2,35 +2,46 @@ import styled from "styled-components";
 import { Container } from "../../components/Cards/styled";
 
 export const ContainerDetails = styled.div`
+  * {
+    margin: 0;
+    padding: 0;
+  }
   width: 100%;
-  height: 100%;
-li {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 0;
- img {
-  margin: 0px;
-  padding: 0px;
-  height: 50px;
-  width: 50px;
- }
-}
+  li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   color: white;
 `;
 export const ContainerIngredientImage = styled.div`
-display: flex;
-gap: 0.5rem;
-`
-export const ContentDetails = styled.main`
+  display: flex;
+  gap: 0.5rem;
+`;
+export const ContainerContent = styled.div`
+  gap: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  width: 50vh;
+`;
+export const ContainerImagePlate = styled.div`
+  width: 50vh;
+  > img {
+    width: 100%;
+  }
+`;
+export const ContentDetails = styled.main`
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  height: 68vh;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 1rem;
-  p,
+  > p,
   h1 {
     width: 100%;
     text-align: center;
@@ -46,22 +57,28 @@ export const ContentDetails = styled.main`
       color: ${({ theme }) => theme.COLORS.priceColor};
     }
   }
-  img {
-    width: 100%;
-    padding: 1.4rem;
+  @media (max-width: 1015px) {
+    justify-content: center;
+    height: 100%;
   }
 `;
 export const ContainerAddCar = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  > p {
+    width: auto;
+  }
   strong {
     margin: 1rem;
     font-size: 24px;
   }
   button {
+    width: auto;
     margin: 1rem;
+    padding: 0.5rem;
     color: ${({ theme }) => theme.COLORS.color_font};
     background-color: ${({ theme }) => theme.COLORS.colorButtonCard};
   }

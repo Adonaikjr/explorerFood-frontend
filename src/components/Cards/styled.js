@@ -3,10 +3,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   color: ${({ theme }) => theme.COLORS.color_font};
-  width: 18.75rem;
-  margin: 1rem;
-  padding: 1rem;
   height: 30rem;
+  flex: 1;
   background-color: ${({ theme }) => theme.COLORS.background_card};
   border-radius: 8px;
   display: flex;
@@ -14,6 +12,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   transition: 0.5s;
+  margin-left: 1rem;
   h1 {
     font-family: Poppins;
     font-size: 24px;

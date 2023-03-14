@@ -1,15 +1,14 @@
 import { Button } from "../../components/Button";
-import { ButtonText } from "../../components/ButtonText";
-import { Header } from "../../components/Header";
-import { Section } from "../../components/Section";
-import { BsDropletHalf, IoAdd, IoRemove } from "react-icons/all";
-import { Tags } from "../../components/Tags";
+import { IoAdd, IoRemove } from "react-icons/all";
 import {
   ContainerDetails,
   ContentDetails,
   ContainerAddCar,
   ContainerIngredientImage,
+  ContainerContent,
+  ContainerImagePlate
 } from "./styled";
+import Icons from "../../assets/icon1.svg";
 import { TiArrowBack } from "react-icons/all";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
@@ -17,6 +16,7 @@ import { useEffect } from "react";
 import { api } from "../../service/api";
 import { useContext } from "react";
 import { AuthContext } from "../../hooks/auth";
+
 export function Details() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -76,10 +76,10 @@ export function Details() {
         <TiArrowBack size={50} color="FFF" />
       </button>
       <ContentDetails>
-        <div>
+        <ContainerImagePlate>
           <img src={`${baseUrl}/file/${data.banner}`} alt={data.title} />
-        </div>
-        <div>
+        </ContainerImagePlate>
+        <ContainerContent>
           <h1>{data.title}</h1>
           <p>{data.description}</p>
           <ContainerIngredientImage>
@@ -96,10 +96,11 @@ export function Details() {
                 );
               })}
           </ContainerIngredientImage>
-          <p>
-            <span> {data.price}</span>
-          </p>
+         
           <ContainerAddCar>
+          <p>
+            <span>R$ {data.price}</span>
+          </p>
             <IoAdd
               size={24}
               style={{ cursor: "pointer" }}
@@ -111,10 +112,9 @@ export function Details() {
               size={24}
               onClick={() => setValue((value) => value - 1)}
             />
-
-            <Button title="Incluir" />
+            <Button title="Incluir" icon={Icons} />
           </ContainerAddCar>
-        </div>
+        </ContainerContent>
       </ContentDetails>
     </ContainerDetails>
   );

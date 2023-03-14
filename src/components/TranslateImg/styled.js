@@ -6,9 +6,12 @@ export const Container = styled.div`
   width: 35rem;
   height: 25.43rem;
   z-index: 1;
-  background-image: url(${img1});
+  /* background-image: url(${img1}); */
   background-repeat: no-repeat;
   background-position: center;
+
+  background-image: linear-gradient(to top, transparent 0%, transparent 90%), url(${img1});
+
   display: flex;
   margin-top: -9.37rem;
    

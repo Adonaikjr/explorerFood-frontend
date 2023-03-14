@@ -6,18 +6,18 @@ export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
-  const [countOrder, setCountOrder] = useState(0)
-  const [dataPlates, setDataPlates] = useState({})
+  const [countOrder, setCountOrder] = useState(0);
+  const [dataPlates, setDataPlates] = useState({});
   const [search, setSearch] = useState(null);
   const [Query, setQuery] = useState("");
-  
-
+  const [isAdmin, setIsAdmin] = useState(0);
 
   async function signIn({ email, password }) {
     try {
       const response = await api.post("/session", { email, password });
       const { user, token } = response.data;
-
+      localStorage.setItem("@explorerFood:id", user.id);
+      localStorage.setItem("@explorerFood:isAdmin", user.isAdmin);
       localStorage.setItem("@explorerFood:user", JSON.stringify(user));
       localStorage.setItem("@explorerFood:token", token);
 
@@ -32,10 +32,21 @@ function AuthProvider({ children }) {
     }
   }
 
+  const VerifyIsAdmin = async () => {
+    try {
+      const userId = localStorage.getItem("@explorerFood:id");
+      const response = await api.get(`/session/${userId}`);
+      setIsAdmin(response.data.isAdmin);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   function signOut() {
+    localStorage.removeItem("@explorerFood:id");
     localStorage.removeItem("@explorerFood:token");
     localStorage.removeItem("@explorerFood:user");
-
+    localStorage.removeItem("@explorerFood:isAdmin");
     setData({});
   }
 
@@ -56,7 +67,7 @@ function AuthProvider({ children }) {
   }
 
   const getPlate = async () => {
-    const admin = '1'
+    const admin = "1";
     try {
       const res = await api.get(`plate/admin/${admin}`);
       setDataPlates(res.data);
@@ -64,24 +75,24 @@ function AuthProvider({ children }) {
       console.log(error);
     }
   };
-  
 
   const getSearch = async () => {
     try {
       const res = await api.get(`plate/?user_id=1&title=${search}&ingredient`);
       setQuery(res.data);
-      console.log(Query);  
+      //    console.log(Query);
     } catch (error) {
       console.log(error);
     }
   };
 
-  
+  useEffect(() => {
+    VerifyIsAdmin()
+  },[isAdmin])
 
   useEffect(() => {
     getSearch();
   }, [search]);
-
 
   useEffect(() => {
     const token = localStorage.getItem("@explorerFood:token");
@@ -94,10 +105,7 @@ function AuthProvider({ children }) {
         user,
       });
     }
-
-    getPlate()
   }, []);
-
 
   return (
     <AuthContext.Provider
@@ -106,12 +114,15 @@ function AuthProvider({ children }) {
         signOut,
         updateProfile,
         user: data.user,
-        countOrder, 
+        countOrder,
         setCountOrder,
         dataPlates,
         Query,
         search,
-        setSearch
+        setSearch,
+        isAdmin,
+        VerifyIsAdmin,
+        getPlate,
       }}
     >
       {children}

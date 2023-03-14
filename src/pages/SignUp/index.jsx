@@ -11,7 +11,8 @@ export function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const navigate = useNavigate()
+  const navigate = useNavigate();
+
   function handleSignUp() {
     if ((!name, !email, !password)) {
       return toast("preencha todos os campos");
@@ -21,7 +22,7 @@ const navigate = useNavigate()
       .post("/users", { name: name, email: email, password: password })
       .then(() => {
         toast("Usuario cadastrado sucesso");
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         if (error.response) {
@@ -37,27 +38,33 @@ const navigate = useNavigate()
       <Form>
         <h1>Crie sua conta</h1>
         <fieldset>
-          <label>Seu nome</label>
-          <Input
-            placeholder="Nome"
-            type="text"
-            icon={FiUser}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <label>E-mail</label>
-          <Input
-            placeholder="Email"
-            type="email"
-            icon={FiMail}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label>Senha</label>
-          <Input
-            placeholder="Senha"
-            type="password"
-            icon={FiLock}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <label>
+            Seu nome
+            <Input
+              placeholder="Nome"
+              type="text"
+              icon={FiUser}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            E-mail
+            <Input
+              placeholder="Email"
+              type="email"
+              icon={FiMail}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label>
+            Senha
+            <Input
+              placeholder="Senha"
+              type="password"
+              icon={FiLock}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
           <Button title="Criar conta" onClick={handleSignUp} />
         </fieldset>
 

@@ -8,9 +8,21 @@ export const ContainerButton = styled.button`
     cursor: pointer;
     height: 3rem;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        gap: 1rem;
     &:disabled{
         opacity: 0.5;
         cursor: not-allowed;
     }
+img {
+
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: auto;
+}
+    
 
 `

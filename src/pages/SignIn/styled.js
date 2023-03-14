@@ -14,6 +14,11 @@ export const Form = styled.form`
 fieldset{
     border: transparent;
     width: 348px;
+    label {
+        >div{
+            background-color: ${({ theme }) => theme.COLORS.inputBackground};
+        }
+    }
     input{
         height:48px;
        

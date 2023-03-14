@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-
 export const Container = styled.header`
   width: 100%;
   height: auto;
@@ -15,6 +14,7 @@ export const Container = styled.header`
   > svg {
     height: 2rem;
     width: 3rem;
+    cursor: pointer;
   }
   a {
     text-decoration: none;
@@ -49,14 +49,19 @@ export const Logo = styled.div`
   font-weight: 700;
   line-height: 29px;
   letter-spacing: 0em;
-  text-align: left;
-  flex-wrap: wrap;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  > p {
+    color: ${({theme}) => theme.COLORS.priceColor};
+    width: 100%;
+    text-align: start;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+  }
   img {
     width: 163px;
-    margin-right: 16px;
   }
 `;
 export const Label = styled.div`

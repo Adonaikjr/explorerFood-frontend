@@ -10,7 +10,8 @@ export function Card({ title, img, p, price, to, plate_id }) {
   const [value, setValue] = useState(0);
   const { countOrder, setCountOrder } = useContext(AuthContext);
   const [status, setStatus] = useState("Pendente");
-  const admin = "1";
+
+  const userId = localStorage.getItem("@explorerFood:id");
   const [data, setData] = useState([]);
 
   if (value < 0) {
@@ -18,18 +19,16 @@ export function Card({ title, img, p, price, to, plate_id }) {
   }
   async function handleAddCard() {
     try {
-      const response = await api.post(`order/${admin}`,{
+      const response = await api.post(`order/${userId}`, {
         status,
-        plate_id
+        plate_id,
       });
-      toast.success('Adicionado aos pedidos')
+      toast.success("Adicionado aos pedidos");
       console.log(response.data);
     } catch (error) {
       console.log(`Ooops algo deu errado ${error}`);
     }
   }
-
-console.log(countOrder)
   return (
     <Container>
       <ContentCard to={to}>

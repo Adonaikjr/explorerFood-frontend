@@ -10,7 +10,7 @@ export default {
       ORANGE: "#FF9000",
   
 
-
+      
       popinsFont: 'Poppins, sans-serif',
 
       colorButtonCard: ' #92000E',
@@ -20,6 +20,7 @@ export default {
       priceColor: '#82F3FF',
       color_font: "#C4C4CC",
 
+      GRAY_800: "#192227",
       GRAY_100: "#999591",
       GRAY_300: "#666360",
       GRAY_500: "rgba(255,255, 255, 0.1)",

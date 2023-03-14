@@ -81,7 +81,7 @@ export function Editpedido() {
     setIngredient((stateProps) => stateProps.filter((tag) => tag !== deleted));
   }
   function handleBack() {
-    navigate("/");
+    navigate(-1);
   }
 
   return (

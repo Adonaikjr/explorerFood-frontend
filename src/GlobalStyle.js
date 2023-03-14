@@ -8,7 +8,8 @@ export default createGlobalStyle`
     }
 
     body{
-        max-width: 1280px;
+        max-width: 1386px;
+     //   width: 100%;
         background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
         color: ${({ theme }) => theme.COLORS.WHITE};
         -webkit-font-smoothing: antialiased;

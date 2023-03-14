@@ -17,6 +17,7 @@ export const ContainerInput = styled.div`
     height: 3rem;
     width: 100%;
     color: ${({ theme }) => theme.COLORS.WHITE};
+    background-color: ${({ theme }) => theme.COLORS.inputBackground};
     padding: 12px;
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.GRAY_300};

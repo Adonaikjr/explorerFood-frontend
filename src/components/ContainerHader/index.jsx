@@ -7,20 +7,31 @@ import { BsSearch } from "react-icons/bs";
 import { IoExitOutline } from "react-icons/all";
 import { AuthContext, useAuth } from "../../hooks/auth";
 import icons from "../../assets/icon1.svg";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { useState } from "react";
-import { api } from "../../service/api";
-import { useEffect } from "react";
-import { CardSearch } from "../CardSearch";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 export function ContainerHeader() {
   const { signOut } = useAuth();
-  const { countOrder, setSearch } = useContext(AuthContext);  
+  const { countOrder, setSearch } = useContext(AuthContext);
+  const [admin, setAdmin] = useState();
+  const navigate = useNavigate();
+  const userId = localStorage.getItem("@explorerFood:id");
+  
+  function handleExit() {
+    signOut();
+    navigate("/");
+  }
+
+  useEffect(() => {
+    {
+      userId === "1" ? setAdmin("Admin") : null;
+    }
+  }, [userId]);
 
   return (
     <Container>
       <Link to="/new">
         <Logo>
+          <p>{admin}</p>
           <img src={polygon} alt="polyg" />
         </Logo>
       </Link>
@@ -39,8 +50,7 @@ export function ContainerHeader() {
           <img src={icons} alt="icon" />
         </NewButton>
       </ContainerButton>
-      <IoExitOutline size={30} onClick={signOut} />
-    
+      <IoExitOutline size={30} onClick={handleExit} />
     </Container>
   );
 }

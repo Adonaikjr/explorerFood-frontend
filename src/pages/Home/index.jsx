@@ -8,11 +8,11 @@ import {
 } from "./styled";
 import { TranslateImg } from "../../components/TranslateImg";
 import { Card } from "../../components/Cards";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../hooks/auth";
 
 export function Home() {
-  const { dataPlates } = useContext(AuthContext);
+  const { dataPlates, VerifyIsAdmin, getPlate } = useContext(AuthContext);
   const baseUrl = "http://localhost:3333";
 
   const breakPoints = [
@@ -62,6 +62,11 @@ export function Home() {
     }
   });
 
+
+useEffect(() => {
+  VerifyIsAdmin()
+  getPlate();
+},[])
   return (
     <ContainerHome>
       <ContainerArticle>
@@ -104,6 +109,7 @@ export function Home() {
             newDissertData.map((item) => {
               return (
                 <Card
+                plate_id={item.id}
                   to={`/details/plates/${item.id}`}
                   key={item.id}
                   p={item.description}
@@ -125,6 +131,7 @@ export function Home() {
             newDrinksData.map((item) => {
               return (
                 <Card
+                plate_id={item.id}
                   to={`/details/plates/${item.id - 1}`}
                   key={item.id}
                   p={item.description}
