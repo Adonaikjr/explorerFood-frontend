@@ -83,3 +83,16 @@ export const ContainerAddCar = styled.div`
     background-color: ${({ theme }) => theme.COLORS.colorButtonCard};
   }
 `;
+
+export const ButtonDelete = styled.button`
+  margin: 1rem;
+  padding: 0.5rem;
+  background-color: ${({theme}) => theme.COLORS.styleButton};
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color:${({theme}) => theme.COLORS.WHITE}; ;
+
+`

@@ -17,8 +17,9 @@ export function AppRoutes() {
         { (isAdmin == 1 ) ? <Route path="/new" element={<Editpedido />} /> : <Route path="/new" element={<Home />} /> }
         <Route path="/details/plates/:id" element={<Details />} />
         <Route path="/pedidos" element={<Orders />} />
+        <Route path="*" element={<Error />} />
       </Route>
-      <Route path="*" element={<Error />} />
+ 
     </Routes>
   );
 }

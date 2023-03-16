@@ -21,12 +21,7 @@ export const Container = styled.div`
     text-align: center;
     width: 100%;
   }
-  :hover {
-    -webkit-transform: scale(1.5);
-    -ms-transform: scale(1.5);
-    transform: scale(1.03);
-    transition: 0.5s;
-  }
+ 
   img {
     cursor: pointer;
     width: 11rem;
@@ -78,8 +73,23 @@ export const ContentCard = styled(Link)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: 0.5s;
+  :hover {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.03);
+    transition: 0.5s;
+  }
 `;
-
+export const ContainerFavorite = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  >div {
+    width: 55%;
+  }
+  
+`
 export const Content = styled.div`
   display: flex;
   align-items: center;

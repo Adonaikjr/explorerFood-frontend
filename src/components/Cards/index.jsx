@@ -1,19 +1,19 @@
 import { Button } from "../Button";
-import { Container, Content, ContentCard } from "./styled";
-import { IoAdd, IoRemove } from "react-icons/all";
+import { Container, Content, ContentCard, ContainerFavorite } from "./styled";
+import { IoAdd, IoRemove, MdFavorite } from "react-icons/all";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../hooks/auth";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
 
-export function Card({ title, img, p, price, to, plate_id }) {
+export function Card({ title, img, p, price, to, plate_id, favorite: Favorite }) {
   const [value, setValue] = useState(0);
   const { countOrder, setCountOrder } = useContext(AuthContext);
   const [status, setStatus] = useState("Pendente");
 
   const userId = localStorage.getItem("@explorerFood:id");
   const [data, setData] = useState([]);
-
+  const { isFavorite, setIsFavoreite } = useState("red");
   if (value < 0) {
     setValue(0);
   }
@@ -31,6 +31,10 @@ export function Card({ title, img, p, price, to, plate_id }) {
   }
   return (
     <Container>
+      <ContainerFavorite>
+        <div></div>
+        {Favorite}
+      </ContainerFavorite>
       <ContentCard to={to}>
         <div>{img}</div>
         <h1>{title}</h1>

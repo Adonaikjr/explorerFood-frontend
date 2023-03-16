@@ -10,9 +10,12 @@ import { TranslateImg } from "../../components/TranslateImg";
 import { Card } from "../../components/Cards";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../hooks/auth";
-
+import { MdFavorite } from "react-icons/all";
+import { useState } from "react";
 export function Home() {
   const { dataPlates, VerifyIsAdmin, getPlate } = useContext(AuthContext);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const baseUrl = "http://localhost:3333";
 
   const breakPoints = [
@@ -51,7 +54,7 @@ export function Home() {
 
   const newDissert_id = dataPlates.category
     ?.map((category) => {
-      if (category.titleCategory === "Sobremesa") {
+      if (category.titleCategory === "Sobremesas") {
         return category.plate_id;
       }
     })
@@ -61,12 +64,14 @@ export function Home() {
       return item;
     }
   });
+  function handleFavorites() {
+    console.log(isFavorite);
+  }
 
-
-useEffect(() => {
-  VerifyIsAdmin()
-  getPlate();
-},[])
+  useEffect(() => {
+    VerifyIsAdmin();
+    getPlate();
+  }, []);
   return (
     <ContainerHome>
       <ContainerArticle>
@@ -83,10 +88,18 @@ useEffect(() => {
 
         <ContainerCarrousel breakPoints={breakPoints}>
           {newPlatesData &&
-            newPlatesData.map((item) => {
+            newPlatesData?.map((item) => {
+              
               return (
                 <Card
-                  to={`/details/plates/${item.id - 1}`}
+                  to={`/details/plates/${item.id}`}
+                  favorite={
+                    isFavorite === true ? (
+                      <MdFavorite size={24} key={item.id} color="white" />
+                    ) : (
+                      <MdFavorite size={24} key={item.id} color="red" />
+                    )
+                  }
                   key={item.id}
                   plate_id={item.id}
                   p={item.description}
@@ -109,7 +122,8 @@ useEffect(() => {
             newDissertData.map((item) => {
               return (
                 <Card
-                plate_id={item.id}
+                  favorite={<MdFavorite size={24} key={item.id} color="red" />}
+                  plate_id={item.id}
                   to={`/details/plates/${item.id}`}
                   key={item.id}
                   p={item.description}
@@ -131,8 +145,8 @@ useEffect(() => {
             newDrinksData.map((item) => {
               return (
                 <Card
-                plate_id={item.id}
-                  to={`/details/plates/${item.id - 1}`}
+                  plate_id={item.id}
+                  to={`/details/plates/${item.id}`}
                   key={item.id}
                   p={item.description}
                   img={

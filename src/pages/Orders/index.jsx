@@ -1,11 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { api } from "../../service/api";
 import { ContainerOrder } from "./styled";
-import { TiArrowBack, MdDelete, MdDeleteOutline } from "react-icons/all";
+import { TiArrowBack, MdDeleteOutline } from "react-icons/all";
 import { useNavigate } from "react-router-dom";
-import { InputOrder } from "../../components/InputOrder";
 import { Input } from "../../components/Input";
-import { AuthContext, useAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
 
 export function Orders() {
   const [data, setData] = useState([]);

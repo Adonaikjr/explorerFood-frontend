@@ -6,48 +6,53 @@ import {
   ContainerAddCar,
   ContainerIngredientImage,
   ContainerContent,
-  ContainerImagePlate
+  ContainerImagePlate,
+  ButtonDelete,
 } from "./styled";
 import Icons from "../../assets/icon1.svg";
-import { TiArrowBack } from "react-icons/all";
+import { TiArrowBack, MdDeleteOutline } from "react-icons/all";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { api } from "../../service/api";
-import { useContext } from "react";
-import { AuthContext } from "../../hooks/auth";
 
 export function Details() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [plate, setPlate] = useState([]);
   const [ingredient, setIngredient] = useState([]);
   const [value, setValue] = useState(0);
-  const {setCountOrder} = useContext(AuthContext)
-
-  //const [params, setParams] = useState()
-
+  const [admin, setAdmin] = useState();
   const { id } = useParams();
-  
-  const baseUrl = "http://localhost:3333";
-  const admin = 1;
 
+  const baseUrl = "http://localhost:3333";
+  const users = 1;
+  const userId = localStorage.getItem("@explorerFood:id");
   function handleBack() {
     navigate(-1);
   }
 
   async function getPlate() {
     try {
-      const res = await api.get(`plate/admin/${admin}`);
-      setData(res.data.plates[id]);
-      const resIngredient = await api.get(`ingredient/${admin}`);
+      const res = await api.get(`plate/admin/${users}`);
+      setData(res.data.plates);
+
+      const resIngredient = await api.get(`ingredient/${users}`);
       setIngredient(resIngredient);
     } catch (error) {
       console.log(error);
     }
   }
+
+  const filterPlate = data.filter((item) => {
+    if (item.id == id) {
+      return item;
+    }
+  });
+
   const newIngredientId = ingredient.data
     ?.map((ingredientId) => {
-      if (ingredientId.plate_id === data.id) {
+      if (ingredientId.plate_id === filterPlate[0].id) {
         return ingredientId;
       }
     })
@@ -61,8 +66,25 @@ export function Details() {
     setValue(0);
   }
 
-  console.log();
-  console.log(newIngredientId);
+  async function handleDelete() {
+    const YesDeleteNote = window.confirm(
+      "Deseja excluir o prato permanentemente?(não será possivel reverter)"
+    );
+    if (YesDeleteNote) {
+      try {
+        await api.delete(`plate/${data.id}`);
+      } catch (error) {
+        console.log("ooops algo deu errado", error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    {
+      userId === "1" ? setAdmin("Admin") : null;
+    }
+  }, [userId, data]);
+
   return (
     <ContainerDetails>
       <button
@@ -75,16 +97,30 @@ export function Details() {
       >
         <TiArrowBack size={50} color="FFF" />
       </button>
+
       <ContentDetails>
         <ContainerImagePlate>
-          <img src={`${baseUrl}/file/${data.banner}`} alt={data.title} />
+          {filterPlate &&
+            filterPlate?.map((item) => {
+              return (
+                <img src={`${baseUrl}/file/${item.banner}`} alt={item.title} />
+              );
+            })}
         </ContainerImagePlate>
         <ContainerContent>
-          <h1>{data.title}</h1>
-          <p>{data.description}</p>
+          {filterPlate &&
+            filterPlate?.map((item) => {
+              return (
+                <div>
+                  <h1>{item.title}</h1>
+                  <p>{item.description}</p>
+                </div>
+              );
+            })}
+
           <ContainerIngredientImage>
             {newIngredientId &&
-              newIngredientId.map((item) => {
+              newIngredientId?.map((item) => {
                 return (
                   <li key={item.id}>
                     <img
@@ -96,11 +132,14 @@ export function Details() {
                 );
               })}
           </ContainerIngredientImage>
-         
+
           <ContainerAddCar>
-          <p>
-            <span>R$ {data.price}</span>
-          </p>
+            <p>
+              {filterPlate &&
+                filterPlate?.map((item) => {
+                  return <span>R$ {item.price}</span>;
+                })}
+            </p>
             <IoAdd
               size={24}
               style={{ cursor: "pointer" }}
@@ -114,6 +153,11 @@ export function Details() {
             />
             <Button title="Incluir" icon={Icons} />
           </ContainerAddCar>
+          {admin === "Admin" ? (
+            <ButtonDelete onClick={handleDelete}>
+              Deletar prato <MdDeleteOutline size={24} />{" "}
+            </ButtonDelete>
+          ) : null}
         </ContainerContent>
       </ContentDetails>
     </ContainerDetails>
