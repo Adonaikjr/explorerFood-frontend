@@ -15,6 +15,7 @@ Instale o projeto com npm ou yarn
 
 ## 🔗 Links
 - Projeto ao vivo https://explorer-food.netlify.app/
+- back-end https://github.com/Adonaikjr/api-food
 ## Documentação
 Atende a todas as especificações na Descrição da Aplicação
 
