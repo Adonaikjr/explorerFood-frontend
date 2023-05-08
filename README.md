@@ -3,31 +3,16 @@
 
 Este projeto foi desenvolvido no projeto final na rocketseat do programa Explorer.
 
-
-## Iniciar projeto
-
+## Instalação
 Clone este repositorio, em seguida instale o node_modules dentro da raiz do projeto 
 
-execute:
+Instale o projeto com npm ou yarn
+
 ```bash
-  yarn install
-```
-ou 
-```bash
+  cd explorerFood-frontend
   npm install
 ```
-para inicializar o projeto 
 
-execute:
-
-```bash
-  yarn dev
-```
-ou
-
-```bash
-  npm run dev
-```
 ## 🔗 Links
 - Projeto ao vivo https://explorer-food.netlify.app/
 ## Documentação
