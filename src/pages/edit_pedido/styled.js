@@ -36,8 +36,7 @@ export const Container = styled.div`
     }
   }
   @media (max-width: 900px) {
-  padding:0px;
-    
+    padding: 0px;
   }
 `;
 
@@ -58,11 +57,11 @@ export const BoxA = styled.div`
   input {
     margin: 0px;
   }
-    img {
-      width: 91%;
-      height: 70%;
-    }
-  
+  img {
+    width: 91%;
+    height: 70%;
+  }
+
   p {
     border: solid 1px white;
     display: flex;
@@ -71,11 +70,13 @@ export const BoxA = styled.div`
   }
   margin-bottom: 1rem;
   @media (max-width: 900px) {
-  flex-wrap: wrap;
-  input, label, #ContainerCategory {
-    width: 100%;
-  }
+    flex-wrap: wrap;
+    input,
+    label,
+    #ContainerCategory {
+      width: 100%;
     }
+  }
 `;
 export const Label = styled.label`
   border-radius: 5px;
@@ -99,7 +100,7 @@ export const BoxB = styled(BoxA)`
 export const ContainerPrice = styled.div`
   margin-top: 1rem;
   width: 30%;
-  @media(max-width: 900px){
+  @media (max-width: 900px) {
     width: 100%;
   }
 `;
@@ -129,20 +130,21 @@ export const Title = styled.h1`
 `;
 
 export const JustifyBtn = styled.div`
-
-display: flex;
-justify-content: flex-end;
-gap: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
   button {
-    
     font-family: Poppins;
-    margin:0px;
+    margin: 0px;
     width: 10rem;
     height: 3rem;
-   // background-color: ${({ theme }) => theme.COLORS.GRAY_500};
     border-radius: 5px;
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-size: 14px;
     font-weight: 500;
+    :hover {
+      transition: 0.5s;
+      background-color: ${({ theme }) => theme.COLORS.colorButtonCard};
+    }
   }
 `;

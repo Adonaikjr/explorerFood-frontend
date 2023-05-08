@@ -79,11 +79,10 @@ export function Details() {
   return (
     <ContainerDetails>
       <ContainerBack>
-        <button>
+        <button onClick={handleBack} >
           <IoIosArrowBack
             size={32}
             color="FFF"
-            onClick={handleBack}
             cursor="pointer"
           />
           Voltar

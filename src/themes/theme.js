@@ -6,7 +6,7 @@ export default {
     BACKGROUND_700: "rgba(0,17,25,1)",
     background_card: "rgba(0, 0, 0, 0.32)",
     styleButton: "#750310",
-
+  
     background_ingredient: "#192227",
 
     WHITE: "#F4EDE8",
