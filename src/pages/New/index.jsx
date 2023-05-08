@@ -17,7 +17,7 @@ import { NoteItem } from "../../components/NoteItem";
 import { IoIosArrowBack } from "react-icons/all";
 import { useNavigate } from "react-router-dom";
 
-export function New() {
+export default function New() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -47,8 +47,6 @@ export function New() {
     } catch (error) {
       console.log(error);
     }
-
-    console.log(category);
   };
 
   function handleFile(event) {
