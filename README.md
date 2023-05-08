@@ -6,7 +6,7 @@ Este projeto foi desenvolvido no projeto final na rocketseat do programa Explore
 
 ## Iniciar projeto
 
-Clone este repositorio, em seguida dentro da raiz do projeto 
+Clone este repositorio, em seguida instale o node_modules dentro da raiz do projeto 
 
 execute:
 ```bash
