@@ -1,3 +1,9 @@
+
+# Explorer Food
+
+Este projeto foi desenvolvido no projeto final na rocketseat do programa Explorer.
+
+## Documentação
 Atende a todas as especificações na Descrição da Aplicação
 
 Um projeto estruturado, com uma boa organização das pastas, divisão de componentes no front-end, etc.
