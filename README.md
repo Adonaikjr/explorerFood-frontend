@@ -3,6 +3,32 @@
 
 Este projeto foi desenvolvido no projeto final na rocketseat do programa Explorer.
 
+
+## Iniciar projeto
+
+Clone este repositorio, em seguida dentro da raiz do projeto 
+
+execute:
+```bash
+  yarn install
+```
+ou 
+```bash
+  npm install
+```
+para inicializar o projeto 
+
+execute:
+
+```bash
+  yarn dev
+```
+ou
+
+```bash
+  npm run dev
+```
+
 ## Documentação
 Atende a todas as especificações na Descrição da Aplicação
 
