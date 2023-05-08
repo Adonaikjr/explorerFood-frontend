@@ -28,7 +28,8 @@ ou
 ```bash
   npm run dev
 ```
-
+## 🔗 Links
+- Projeto ao vivo https://explorer-food.netlify.app/
 ## Documentação
 Atende a todas as especificações na Descrição da Aplicação
 
