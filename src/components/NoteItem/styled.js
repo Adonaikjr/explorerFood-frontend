@@ -32,5 +32,6 @@ export const Content = styled.div`
   justify-content: center;
   input {
     width: 100%;
+    padding-left: 1rem;
   }
 `;

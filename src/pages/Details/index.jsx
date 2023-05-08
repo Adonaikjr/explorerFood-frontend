@@ -4,13 +4,13 @@ import {
   ContainerDetails,
   ContentDetails,
   ContainerAddCar,
-  ContainerIngredientImage,
+  ContainerIngredients,
   ContainerContent,
+  ContainerBack,
   ContainerImagePlate,
-  ButtonDelete,
 } from "./styled";
 import Icons from "../../assets/icon1.svg";
-import { TiArrowBack, MdDeleteOutline } from "react-icons/all";
+import { TiArrowBack, IoIosArrowBack } from "react-icons/all";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -29,7 +29,7 @@ export function Details() {
   const users = 1;
   const userId = localStorage.getItem("@explorerFood:id");
   function handleBack() {
-    navigate(-1);
+    navigate("/");
   }
 
   async function getPlate() {
@@ -58,26 +58,17 @@ export function Details() {
     })
     .filter(Boolean);
 
-  useEffect(() => {
-    getPlate();
-  }, []);
+  function handleEdit() {
+    navigate(`/edit/${id}`);
+  }
 
   if (value < 0) {
     setValue(0);
   }
 
-  async function handleDelete() {
-    const YesDeleteNote = window.confirm(
-      "Deseja excluir o prato permanentemente?(não será possivel reverter)"
-    );
-    if (YesDeleteNote) {
-      try {
-        await api.delete(`plate/${data.id}`);
-      } catch (error) {
-        console.log("ooops algo deu errado", error);
-      }
-    }
-  }
+  useEffect(() => {
+    getPlate();
+  }, []);
 
   useEffect(() => {
     {
@@ -87,16 +78,18 @@ export function Details() {
 
   return (
     <ContainerDetails>
-      <button
-        style={{
-          backgroundColor: "transparent",
-          border: "none",
-          paddingTop: 35,
-        }}
-        onClick={handleBack}
-      >
-        <TiArrowBack size={50} color="FFF" />
-      </button>
+      <ContainerBack>
+        <button>
+          <IoIosArrowBack
+            size={32}
+            color="FFF"
+            onClick={handleBack}
+            cursor="pointer"
+          />
+          Voltar
+        </button>
+        <div></div>
+      </ContainerBack>
 
       <ContentDetails>
         <ContainerImagePlate>
@@ -107,57 +100,48 @@ export function Details() {
               );
             })}
         </ContainerImagePlate>
+
         <ContainerContent>
           {filterPlate &&
             filterPlate?.map((item) => {
               return (
-                <div>
+                <section>
                   <h1>{item.title}</h1>
                   <p>{item.description}</p>
-                </div>
+                </section>
               );
             })}
 
-          <ContainerIngredientImage>
+          <ContainerIngredients>
             {newIngredientId &&
               newIngredientId?.map((item) => {
-                return (
-                  <li key={item.id}>
-                    <img
-                      src={`${baseUrl}/file/${item.banner}`}
-                      alt={item.name}
-                    />
-                    {item.name}
-                  </li>
-                );
+                return <p key={item.id}>{item.name}</p>;
               })}
-          </ContainerIngredientImage>
+          </ContainerIngredients>
 
-          <ContainerAddCar>
-            <p>
+          {userId === "1" ? (
+            <Button title="Editar prato" onClick={handleEdit} />
+          ) : (
+            <ContainerAddCar>
               {filterPlate &&
                 filterPlate?.map((item) => {
-                  return <span>R$ {item.price}</span>;
+                  return <Button title={`incluir - R$ ${item.price}`} />;
                 })}
-            </p>
-            <IoAdd
-              size={24}
-              style={{ cursor: "pointer" }}
-              onClick={() => setValue((value) => value + 1)}
-            />
-            <strong> {value}</strong>
-            <IoRemove
-              style={{ cursor: "pointer" }}
-              size={24}
-              onClick={() => setValue((value) => value - 1)}
-            />
-            <Button title="Incluir" icon={Icons} />
-          </ContainerAddCar>
-          {admin === "Admin" ? (
-            <ButtonDelete onClick={handleDelete}>
-              Deletar prato <MdDeleteOutline size={24} />{" "}
-            </ButtonDelete>
-          ) : null}
+              <article>
+                <IoAdd
+                  size={24}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setValue((value) => value + 1)}
+                />
+                <strong>{value}</strong>
+                <IoRemove
+                  style={{ cursor: "pointer" }}
+                  size={24}
+                  onClick={() => setValue((value) => value - 1)}
+                />
+              </article>
+            </ContainerAddCar>
+          )}
         </ContainerContent>
       </ContentDetails>
     </ContainerDetails>

@@ -2,13 +2,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-    grid-area: header;
     height: 105px;
     width:100%;
     border-bottom-width:1px;
     border-bottom-style:solid;
     border-bottom-color: ${({theme}) => theme.COLORS.BACKGROUND_700};
-
     display: flex;
     align-items: center;
     justify-content: space-between;

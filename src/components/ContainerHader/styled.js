@@ -3,22 +3,28 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.header`
+  position: relative;
+  animation: sidebar;
+  animation-duration: 0.5s;
+  transition: 2s;
   width: 100%;
   height: auto;
-  padding: 2rem 3rem 2rem 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   background-color: ${({ theme }) => theme.COLORS.secondBackground};
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  > svg {
-    height: 2rem;
-    width: 3rem;
-    cursor: pointer;
-  }
   a {
     text-decoration: none;
     color: #fff;
+    > svg {
+      display: none;
+    }
   }
   gap: 12px;
   button {
@@ -38,21 +44,47 @@ export const Container = styled.header`
   }
   font-family: Roboto;
   font-size: 16px;
-  font-weight: 400;
-  line-height: 26px;
-
   text-align: center;
+
+  @media (max-width: 900px) {
+    a {
+      > svg {
+        display: block;
+      }
+    }
+
+    svg {
+      display: inline-block;
+      animation: rotate 0.5s linear;
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+    padding-top: 56px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
 `;
 export const Logo = styled.div`
   font-family: Roboto;
   font-size: 25px;
   font-weight: 700;
-  line-height: 29px;
-  letter-spacing: 0em;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   > p {
-    color: ${({theme}) => theme.COLORS.priceColor};
+    color: ${({ theme }) => theme.COLORS.priceColor};
     width: 100%;
     text-align: start;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -63,6 +95,11 @@ export const Logo = styled.div`
   img {
     width: 163px;
   }
+  @media (max-width: 900px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
 `;
 export const Label = styled.div`
   display: flex;
@@ -70,26 +107,67 @@ export const Label = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.COLORS.inputBackground};
   border-radius: 5px 5px 5px 5px;
-  width: 21.5rem;
-
+  width: 40rem;
   input {
-    height: 3rem;
+    height: 2rem;
     //border: 1px solid ${({ theme }) => theme.COLORS.BORDER_INPUT};
     background-color: ${({ theme }) => theme.COLORS.inputBackground};
     border-radius: 5px;
     color: ${({ theme }) => theme.COLORS.BORDER_INPUT};
     display: flex;
   }
+  @media (max-width: 900px) {
+    display: none;
+    width: 0px;
+    height: 0px;
+    input {
+      display: none;
+      width: 0px;
+      height: 0px;
+      font-size: 0px;
+      border: none;
+    }
+  }
 `;
-export default styled(Link)`
+export const ContainerButton = styled(Link)`
+ 
   button {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
   }
+  @media (max-width: 900px) {
+    margin: 0px;
+    padding: 0px;
+    width: 0px;
+    height: 0px;
+
+    img {
+      margin: 0px;
+    }
+    button {
+      width: 0px;
+      height: 0px;
+      font-size: 0px;
+      margin: 0px;
+      background-color: transparent;
+      border: none;
+    }
+  }
 `;
 export const Favorites = styled.div`
   display: flex;
   align-items: center;
+`;
+export const ContentExit = styled.div`
+  @media (max-width: 900px) {
+    border: none;
+    width: 0px;
+    height: 0px;
+    svg {
+      width: 0px;
+      height: 0px;
+    }
+  }
 `;

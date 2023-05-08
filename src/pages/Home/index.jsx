@@ -5,13 +5,15 @@ import {
   ContainerArticle,
   ContainerCarrousel,
   Main,
+  ContainerStroll,
 } from "./styled";
 import { TranslateImg } from "../../components/TranslateImg";
 import { Card } from "../../components/Cards";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../hooks/auth";
-import { MdFavorite } from "react-icons/all";
+import { MdFavorite, AiOutlineHeart } from "react-icons/all";
 import { useState } from "react";
+
 export function Home() {
   const { dataPlates, VerifyIsAdmin, getPlate } = useContext(AuthContext);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -19,10 +21,12 @@ export function Home() {
   const baseUrl = "http://localhost:3333";
 
   const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-    { width: 768, itemsToShow: 3 },
-    { width: 1200, itemsToShow: 4 },
+    { width: 1, itemsToShow: 2 },
+    { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
+    { width: 850, itemsToShow: 3 },
+    { width: 1150, itemsToShow: 4, itemsToScroll: 2 },
+    { width: 1450, itemsToShow: 5 },
+    { width: 1750, itemsToShow: 6 },
   ];
 
   const newPlates_id = dataPlates.category
@@ -65,7 +69,10 @@ export function Home() {
     }
   });
   function handleFavorites() {
-    console.log(isFavorite);
+    setIsFavorite(true);
+    if (isFavorite) {
+      setIsFavorite(false);
+    }
   }
 
   useEffect(() => {
@@ -85,19 +92,25 @@ export function Home() {
       </ContainerArticle>
       <Main>
         <h1>Pratos Principais</h1>
-
         <ContainerCarrousel breakPoints={breakPoints}>
           {newPlatesData &&
             newPlatesData?.map((item) => {
-              
               return (
                 <Card
                   to={`/details/plates/${item.id}`}
                   favorite={
-                    isFavorite === true ? (
-                      <MdFavorite size={24} key={item.id} color="white" />
+                    isFavorite === false ? (
+                      <AiOutlineHeart
+                        size={24}
+                        color="white"
+                        onClick={handleFavorites}
+                      />
                     ) : (
-                      <MdFavorite size={24} key={item.id} color="red" />
+                      <MdFavorite
+                        size={24}
+                        color="red"
+                        onClick={handleFavorites}
+                      />
                     )
                   }
                   key={item.id}
@@ -122,7 +135,21 @@ export function Home() {
             newDissertData.map((item) => {
               return (
                 <Card
-                  favorite={<MdFavorite size={24} key={item.id} color="red" />}
+                  favorite={
+                    isFavorite === false ? (
+                      <AiOutlineHeart
+                        size={24}
+                        color="white"
+                        onClick={handleFavorites}
+                      />
+                    ) : (
+                      <MdFavorite
+                        size={24}
+                        color="red"
+                        onClick={handleFavorites}
+                      />
+                    )
+                  }
                   plate_id={item.id}
                   to={`/details/plates/${item.id}`}
                   key={item.id}
@@ -147,6 +174,21 @@ export function Home() {
                 <Card
                   plate_id={item.id}
                   to={`/details/plates/${item.id}`}
+                  favorite={
+                    isFavorite === false ? (
+                      <AiOutlineHeart
+                        size={24}
+                        color="white"
+                        onClick={handleFavorites}
+                      />
+                    ) : (
+                      <MdFavorite
+                        size={24}
+                        color="red"
+                        onClick={handleFavorites}
+                      />
+                    )
+                  }
                   key={item.id}
                   p={item.description}
                   img={

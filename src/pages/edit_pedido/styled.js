@@ -1,6 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
+  animation: sidebar;
+  animation-duration: 1s;
+
+  @keyframes mymoveTwo {
+    from {
+      left: 200px;
+    }
+    to {
+      left: 0px;
+    }
+  }
+
+  padding-left: 6rem;
+  padding-right: 6rem;
   color: white;
   height: 100%;
   input {
@@ -9,10 +24,20 @@ export const Container = styled.div`
     border-radius: 5px;
     border: transparent;
   }
-  input,
-  label {
-    border: transparent;
-    margin: 0rem 1rem 0rem 1rem;
+  > button {
+    background-color: transparent;
+    border: none;
+    padding-top: 1rem;
+    > p {
+      color: white;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  }
+  @media (max-width: 900px) {
+  padding:0px;
+    
   }
 `;
 
@@ -24,20 +49,20 @@ export const Form = styled.form`
 `;
 export const BoxA = styled.div`
   display: flex;
-  //border: solid;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  div {
-    border: none;
-    height: 100%;
+  justify-content: space-between;
+  gap: 1rem;
+  #ContainerCategory {
+    width: 40%;
+  }
+  width: 100%;
+  input {
+    margin: 0px;
+  }
     img {
       width: 91%;
       height: 70%;
     }
-  }
-  input {
-    height: 3.5rem;
-  }
+  
   p {
     border: solid 1px white;
     display: flex;
@@ -45,6 +70,12 @@ export const BoxA = styled.div`
     border-radius: 5px;
   }
   margin-bottom: 1rem;
+  @media (max-width: 900px) {
+  flex-wrap: wrap;
+  input, label, #ContainerCategory {
+    width: 100%;
+  }
+    }
 `;
 export const Label = styled.label`
   border-radius: 5px;
@@ -58,9 +89,7 @@ export const Label = styled.label`
 `;
 export const BoxB = styled(BoxA)`
   //border: solid;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  align-items: center;
   input {
     height: 3.5rem;
   }
@@ -69,7 +98,10 @@ export const BoxB = styled(BoxA)`
 
 export const ContainerPrice = styled.div`
   margin-top: 1rem;
-  width: 100%;
+  width: 30%;
+  @media(max-width: 900px){
+    width: 100%;
+  }
 `;
 
 export const BoxC = styled.div`
@@ -93,22 +125,24 @@ export const BoxC = styled.div`
   }
 `;
 export const Title = styled.h1`
-  margin: 2rem;
+  margin: 1rem;
 `;
 
 export const JustifyBtn = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  width: 100%;
 
+display: flex;
+justify-content: flex-end;
+gap: 1rem;
   button {
-    border: solid red;
-    width: 30rem;
+    
+    font-family: Poppins;
+    margin:0px;
+    width: 10rem;
     height: 3rem;
-    background-color: ${({ theme }) => theme.COLORS.GRAY_500};
-    border: none;
+   // background-color: ${({ theme }) => theme.COLORS.GRAY_500};
     border-radius: 5px;
     color: ${({ theme }) => theme.COLORS.WHITE};
-    margin: 2rem;
+    font-size: 14px;
+    font-weight: 500;
   }
 `;

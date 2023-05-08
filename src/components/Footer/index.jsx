@@ -1,15 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Container, Logo } from "../ContainerHader/styled";
-import polygon from "../../assets/logo.svg";
+import { ContainerFooter } from "./styled";
+import LogoFooter from "../../assets/footer.svg";
 import { Link } from "react-router-dom";
 export function Footer() {
   return (
-    <Container>
-      <Link to="/new">
-        <Logo>
-          <img src={polygon} alt="polyg" />
-        </Logo>
-      </Link>
-    </Container>
+    <ContainerFooter>
+      <img src={LogoFooter} alt="logo" />
+      <p>©2023 Todos os direitos reservados.</p>
+    </ContainerFooter>
   );
 }

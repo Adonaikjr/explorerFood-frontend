@@ -47,6 +47,8 @@ function AuthProvider({ children }) {
     localStorage.removeItem("@explorerFood:token");
     localStorage.removeItem("@explorerFood:user");
     localStorage.removeItem("@explorerFood:isAdmin");
+    window.location.reload(true);
+
     setData({});
   }
 
@@ -78,17 +80,18 @@ function AuthProvider({ children }) {
 
   const getSearch = async () => {
     try {
-      const res = await api.get(`plate/?user_id=1&title=${search}&ingredient`);
+      const res = await api.get(
+        `plate/?user_id=1&title=${search}`
+      );
       setQuery(res.data);
-      //    console.log(Query);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    VerifyIsAdmin()
-  },[isAdmin])
+    VerifyIsAdmin();
+  }, [isAdmin]);
 
   useEffect(() => {
     getSearch();

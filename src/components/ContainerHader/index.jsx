@@ -1,10 +1,17 @@
 /* eslint-disable prettier/prettier */
-import ContainerButton, { Container, Logo, Label, Favorites } from "./styled";
+import {
+  ContainerButton,
+  Container,
+  Logo,
+  Label,
+  Favorites,
+  ContentExit,
+} from "./styled";
 import polygon from "../../assets/logo.svg";
 import { NewButton } from "../NewButton";
 import { Input } from "../Input";
 import { BsSearch } from "react-icons/bs";
-import { IoExitOutline } from "react-icons/all";
+import { IoExitOutline, AiOutlineMenu } from "react-icons/all";
 import { AuthContext, useAuth } from "../../hooks/auth";
 import icons from "../../assets/icon1.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,7 +34,6 @@ export function ContainerHeader() {
       console.log(error);
     }
   }
-
   function handleExit() {
     signOut();
     navigate("/");
@@ -41,28 +47,36 @@ export function ContainerHeader() {
 
   return (
     <Container>
-      <Link to="/new">
-        <Logo>
-          <p>{admin}</p>
-          <img src={polygon} alt="polyg" />
-        </Logo>
+      <Link to="/menu">
+        <AiOutlineMenu size={24} />
       </Link>
-      <Favorites>
-        <>Meus Favoritos</>
-      </Favorites>
+
+      <Logo>
+        <img src={polygon} alt="polyg" />
+        <p>{admin}</p>
+      </Logo>
+      
       <Label>
         <Input
-          placeholder="Pratos do dia?🔍"
+          placeholder="Busque por pratos ou ingredientes"
           icon={BsSearch}
           onChange={(e) => setSearch(e.target.value)}
         />
       </Label>
-      <ContainerButton to="/pedidos">
-        <NewButton title="Meu pedido" countOrder={countOrder}>
+
+      {data === 1 ? (
+        <ContainerButton to="/new">
+          <NewButton title="Novo Prato" />
+        </ContainerButton>
+      ) : (
+        <NewButton title="Pedidos">
           <img src={icons} alt="icon" />
         </NewButton>
-      </ContainerButton>
-      <IoExitOutline size={30} onClick={handleExit} />
+      )}
+
+      <ContentExit>
+        <IoExitOutline size={30} onClick={handleExit} cursor="pointer" />
+      </ContentExit>
     </Container>
   );
 }

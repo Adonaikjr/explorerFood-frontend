@@ -14,11 +14,11 @@ export const ContainerInput = styled.div`
   margin-top: 8px;
   > input {
     border: 0px;
-    height: 3rem;
     width: 100%;
     color: ${({ theme }) => theme.COLORS.WHITE};
     background-color: ${({ theme }) => theme.COLORS.inputBackground};
     padding: 12px;
+    border-radius: 5px;
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.GRAY_300};
     }

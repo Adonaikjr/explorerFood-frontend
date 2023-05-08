@@ -3,23 +3,25 @@ import { Error } from "../pages/Error";
 import { Details } from "../pages/Details";
 import { Home } from "../pages/Home";
 import { LayoutDefault } from "../Layout/LayoutDefault";
-import { Editpedido } from "../pages/edit_pedido";
-import { Orders } from '../pages/Orders'
 import { useAuth } from "../hooks/auth";
-
+import { Sidebar } from "../components/SideBar";
+import { New } from "../pages/new";
+import { Editpedido } from "../pages/edit_pedido";
 export function AppRoutes() {
-  const {isAdmin} = useAuth()
- 
+  const { isAdmin } = useAuth();
+
   return (
     <Routes>
       <Route path="/" element={<LayoutDefault />}>
         <Route path="/" element={<Home />} />
-        { (isAdmin == 1 ) ? <Route path="/new" element={<Editpedido />} /> : <Route path="/new" element={<Home />} /> }
+        <Route path="/new" element={<New />} />
+
         <Route path="/details/plates/:id" element={<Details />} />
-        <Route path="/pedidos" element={<Orders />} />
+        <Route path="/edit/:id" element={<Editpedido />} />
+      
         <Route path="*" element={<Error />} />
       </Route>
- 
+      <Route path="/menu" element={<Sidebar />} />
     </Routes>
   );
 }

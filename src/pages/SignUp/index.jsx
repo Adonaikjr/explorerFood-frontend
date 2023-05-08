@@ -11,7 +11,7 @@ export function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isAdmin, setIsAdmin] = useState(0)
+  const [isAdmin, setIsAdmin] = useState(0);
 
   const navigate = useNavigate();
 
@@ -20,11 +20,8 @@ export function Signup() {
       return toast("preencha todos os campos");
     }
 
-    if(name === 'admin'){
-      if(email === 'admin@admin'){
-        setIsAdmin(1)
-        
-      }
+    if (name !== "admin" && email !== "admin@admin") {
+      setIsAdmin(0);
     }
 
     api
@@ -47,7 +44,7 @@ export function Signup() {
       <Form>
         <h1>Crie sua conta</h1>
         <fieldset>
-          <label >
+          <label>
             Seu nome
             <Input
               placeholder="Nome"
