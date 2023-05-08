@@ -18,7 +18,7 @@ export function Home() {
   const { dataPlates, VerifyIsAdmin, getPlate } = useContext(AuthContext);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const baseUrl = "http://localhost:3333";
+  const baseUrl = "https://api-food-sufa.onrender.com";
 
   const breakPoints = [
     { width: 1, itemsToShow: 2 },

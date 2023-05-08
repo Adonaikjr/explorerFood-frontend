@@ -25,7 +25,7 @@ export function Details() {
   const [admin, setAdmin] = useState();
   const { id } = useParams();
 
-  const baseUrl = "http://localhost:3333";
+  const baseUrl = "https://api-food-sufa.onrender.com";
   const users = 1;
   const userId = localStorage.getItem("@explorerFood:id");
   function handleBack() {
